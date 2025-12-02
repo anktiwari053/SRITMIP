@@ -1,0 +1,87 @@
+.about-container {
+ 
+   min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #b7c6d6;
+}
+
+.about-container h1 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #222;
+  font-weight: bold;
+}
+
+.team-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Member card styling */
+.member-card {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  padding: 25px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #a7dbde, #d0d5dd);
+  color: #030303;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+/* Member image */
+.member-card img {
+  width: 10%;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+/* Info section */
+.member-info {
+  width: 70%;
+  display: flex;
+  flex-direction: column; /* each info on a new line */
+}
+
+.member-info h3 {
+  margin: 0 0 12px 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.member-info p {
+  margin: 6px 0;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media(max-width: 800px){
+  .member-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .member-card img {
+    width: 50%;
+    margin: auto;
+  }
+
+  .member-info {
+    width: 100%;
+  }
+}
