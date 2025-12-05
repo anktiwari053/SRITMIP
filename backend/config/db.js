@@ -8,8 +8,12 @@ require('dotenv').config();
  */
 const connectDB = async () => {
   try {
-    // MongoDB connection string - defaults to local if not provided
-    const mongoURI = process.env.MONGODB_URI ;
+    // MongoDB connection string from environment variables
+    const mongoURI = process.env.MONGODB_URI;
+    
+    if (!mongoURI) {
+      throw new Error('MONGODB_URI is not defined in environment variables');
+    }
     
     const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,

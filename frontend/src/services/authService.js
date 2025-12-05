@@ -9,7 +9,7 @@ import api from '../utils/api';
  * @returns {Promise} User data with token
  */
 export const signup = async (name, email, password) => {
-  const response = await api.post('/auth/signup', { name, email, password });
+  const response = await api.post('/auth/register', { name, email, password });
   if (response.data.token) {
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -21,15 +21,16 @@ export const signup = async (name, email, password) => {
  * Login user
  * @param {string} email - User's email
  * @param {string} password - User's password
- * @returns {Promise} User data with token
+ * @returns {Promise} Response with token
  */
 export const login = async (email, password) => {
   const response = await api.post('/auth/login', { email, password });
-  if (response.data.token) {
+  // Backend returns { success: true, token: "jwt-token-value" }
+  if (response.data.success && response.data.token) {
     localStorage.setItem('token', response.data.token);
-    localStorage.setItem('user', JSON.stringify(response.data));
+    return response.data;
   }
-  return response.data;
+  throw new Error('Login failed: No token received');
 };
 
 /**
@@ -37,8 +38,9 @@ export const login = async (email, password) => {
  * @returns {Promise} Current user data
  */
 export const getCurrentUser = async () => {
-  const response = await api.get('/auth/me');
-  return response.data;
+  const response = await api.get('/auth/getuser');
+  // Backend returns { success: true, data: { _id, name, email, createdAt } }
+  return response.data.data;
 };
 
 /**

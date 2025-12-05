@@ -1,132 +1,38 @@
-// Notes routes for CRUD operations
+// Notes Routes
 const express = require('express');
-const Note = require('../models/Note');
+const router = express.Router();
+const { addNote, fetchAllNotes, updateNote, deleteNote } = require('../controllers/notesController');
 const { protect } = require('../middleware/auth');
 
-const router = express.Router();
+// All notes routes are protected
+router.use(protect);
 
 /**
- * @route   GET /api/notes
- * @desc    Get all notes for authenticated user
- * @access  Private
- */
-router.get('/', protect, async (req, res) => {
-  try {
-    const notes = await Note.find({ user: req.user._id }).sort({ updatedAt: -1 });
-    res.json(notes);
-  } catch (error) {
-    console.error('Get notes error:', error);
-    res.status(500).json({ message: 'Server error fetching notes' });
-  }
-});
-
-/**
- * @route   GET /api/notes/:id
- * @desc    Get a single note by ID
- * @access  Private
- */
-router.get('/:id', protect, async (req, res) => {
-  try {
-    const note = await Note.findById(req.params.id);
-
-    if (!note) {
-      return res.status(404).json({ message: 'Note not found' });
-    }
-
-    // Check if note belongs to user
-    if (note.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to access this note' });
-    }
-
-    res.json(note);
-  } catch (error) {
-    console.error('Get note error:', error);
-    res.status(500).json({ message: 'Server error fetching note' });
-  }
-});
-
-/**
- * @route   POST /api/notes
+ * @route   POST /api/notes/add
  * @desc    Create a new note
  * @access  Private
  */
-router.post('/', protect, async (req, res) => {
-  try {
-    const { title, content  } = req.body;
-
-    if (!title || !content) {
-      return res.status(400).json({ message: 'Please provide title and content' });
-    }
-
-    const note = await Note.create({
-      user: req.user._id,
-      title,
-      content,
-    });
-
-    res.status(201).json(note);
-  } catch (error) {
-    console.error('Create note error:', error);
-    res.status(500).json({ message: 'Server error creating note' });
-  }
-});
+router.post('/add', addNote);
 
 /**
- * @route   PUT /api/notes/:id
+ * @route   GET /api/notes/fetchall
+ * @desc    Get all notes for logged in user
+ * @access  Private
+ */
+router.get('/fetchall', fetchAllNotes);
+
+/**
+ * @route   PUT /api/notes/update/:id
  * @desc    Update a note
  * @access  Private
  */
-router.put('/:id', protect, async (req, res) => {
-  try {
-    const { title, content } = req.body;
-    const note = await Note.findById(req.params.id);
-
-    if (!note) {
-      return res.status(404).json({ message: 'Note not found' });
-    }
-
-    // Check if note belongs to user
-    if (note.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to update this note' });
-    }
-
-    note.title = title || note.title;
-    note.content = content || note.content;
-    note.updatedAt = Date.now();
-
-    const updatedNote = await note.save();
-    res.json(updatedNote);
-  } catch (error) {
-    console.error('Update note error:', error);
-    res.status(500).json({ message: 'Server error updating note' });
-  }
-});
+router.put('/update/:id', updateNote);
 
 /**
- * @route   DELETE /api/notes/:id
+ * @route   DELETE /api/notes/delete/:id
  * @desc    Delete a note
  * @access  Private
  */
-router.delete('/:id', protect, async (req, res) => {
-  try {
-    const note = await Note.findById(req.params.id);
-
-    if (!note) {
-      return res.status(404).json({ message: 'Note not found' });
-    }
-
-    // Check if note belongs to user
-    if (note.user.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Not authorized to delete this note' });
-    }
-
-    await note.deleteOne();
-    res.json({ message: 'Note deleted successfully' });
-  } catch (error) {
-    console.error('Delete note error:', error);
-    res.status(500).json({ message: 'Server error deleting note' });
-  }
-});
+router.delete('/delete/:id', deleteNote);
 
 module.exports = router;
-

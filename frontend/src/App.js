@@ -1,90 +1,89 @@
 // Main App component with routing
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
-import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login.jsx';
 import Signup from './pages/Signup';
-import Home from './pages/Home';
+import Home from './pages/Home.jsx';
 import Chatbot from './pages/Chatbot';
 import Profile from './pages/Profile';
 import About from './pages/TeamMembers';
-import SetTime from './pages/SetTime'
+import SetTime from './pages/SetTime';
 
 import './App.css';
 
 /**
  * App Component
  * Main application component with routing configuration
- * Sets up all routes for the application
+ * Sets up all routes for the application with proper authentication
+ * - Public routes: /login, /signup
+ * - Protected routes: /home, /, /chatbot, /profile, /about, /setTime
+ * - ProtectedRoute component checks for token and redirects to /login if missing
  */
 function App() {
   return ( 
-    <>
     <Router>
       <div className="App">
         <Routes>
-          {/* Public routes */}
+          {/* Public routes - accessible without authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           
-          {/* Private routes - require authentication */}
+          {/* Protected routes - require authentication via ProtectedRoute */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/"
             element={
-              <PrivateRoute>
+              <ProtectedRoute>
                 <Home />
-              </PrivateRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/chatbot"
             element={
-              <PrivateRoute>
+              <ProtectedRoute>
                 <Chatbot />
-              </PrivateRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path="/profile"
             element={
-              <PrivateRoute>
+              <ProtectedRoute>
                 <Profile />
-              </PrivateRoute>
+              </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path="/about"
             element={
-              <PrivateRoute>
+              <ProtectedRoute>
                 <About />
-              </PrivateRoute>
+              </ProtectedRoute>
             }
           />
-            
-              <Route
+          <Route
             path="/setTime"
             element={
-              <PrivateRoute>
-                <SetTime/>
-              </PrivateRoute>
+              <ProtectedRoute>
+                <SetTime />
+              </ProtectedRoute>
             }
           />
-         
-       
-         
           
           {/* Catch all - redirect to home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </div>
-
-      
     </Router>
-
-    
-
-
-    </>  
   );
 }
 

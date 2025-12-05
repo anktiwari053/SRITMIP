@@ -68,7 +68,7 @@ const Home = () => {
   // Handle edit note
   const handleEdit = (note) => {
     setEditingNote(note);
-    setFormData({ title: note.title, content: note.content });
+    setFormData({ title: note.title, content: note.description });
     setShowForm(true);
   };
 
@@ -183,7 +183,7 @@ const Home = () => {
                       </button>
                     </div>
                   </div>
-                  <p className="note-content">{note.content}</p>
+                  <p className="note-content">{note.description}</p>
                   <div className="note-footer">
                     <span className="note-date">
                       {new Date(note.updatedAt).toLocaleDateString()}

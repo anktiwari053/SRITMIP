@@ -17,12 +17,16 @@ const noteSchema = new mongoose.Schema({
     required: [true, 'Please provide a note title'],
     trim: true,
   },
-  content: {
+  description: {
     type: String,
-    required: [true, 'Please provide note content'],
+    required: [true, 'Please provide note description'],
     trim: true,
   },
-  
+  tag: {
+    type: String,
+    default: 'General',
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

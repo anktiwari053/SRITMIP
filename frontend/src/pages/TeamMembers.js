@@ -4,6 +4,7 @@ import "./About.css"; // CSS file
 import premImg from "./img/linkdin.jpg";
 import Navbar from '../components/Navbar';
 import premImg1 from "./img/Anshika1.jpg";
+import premImg2 from "./img/Akanksha.jpg";
 
 const teamMembers = [
   {
@@ -22,7 +23,7 @@ const teamMembers = [
     college: "SRIT College",
     email: "anshikaprajapati110405@gmail.com ",
     img: premImg1,
-    experience:"",
+    experience:"Gained practical experience in building responsive web interfaces using HTML, CSS, JavaScript, and modern UI frameworks.",
 
   },
   {
@@ -31,28 +32,11 @@ const teamMembers = [
     Role: "UI/UX Designer",
     roll: "0205CS231015",
     college: "SRIT College",
-    email: "ajay@example.com",
-    img: "https://via.placeholder.com/120",
-    experience:"",
+    email: "akankshapatel9997@gmail.com",
+    img: premImg2,
+    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UI/UX tools.",
   },
-  {
-    name: "Avanshika Soni",
-   Role: " Developer",
-    roll: "0205CS231034",
-    college: "SRIT College",
-    email: "avanshikasonisoni@gmail.com",
-    img: "https://via.placeholder.com/120",
-    experience:"",
-  },
-   {
-    name: "Amisha Vishkarma",
-   Role: " Developer",
-    roll: "0205CS231019",
-    college: "SRIT College",
-    email: "30amishasharma@gmail.com",
-    img: "https://via.placeholder.com/120",
-    experience:"",
-  },
+ 
 ];
 
 const About = () => {
