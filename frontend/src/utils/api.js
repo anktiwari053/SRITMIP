@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Base URL for API requests
-const API_URL =  'https://sritmin-backend.onrender.com';
+const API_URL =  'http://localhost:5000/api';
 
 // Create axios instance with default config
 const api = axios.create({
