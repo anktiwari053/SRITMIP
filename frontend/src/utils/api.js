@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Base URL for API requests
-const API_URL =  'http://localhost:5000/api';
+const API_URL =  'https://sritmip-backend.onrender.com/api';
 
 // Create axios instance with default config
 const api = axios.create({
