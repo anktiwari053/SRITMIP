@@ -1,32 +1,27 @@
-// Profile page component displaying all user data
+// Profile page component displaying all user data safely
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { getProfile, updateProfile } from '../services/profileService';
 import './Profile.css';
 
-/**
- * Profile Page Component
- * Displays user profile with all data: name, email, notes, chat history, and timer data
- */
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '' });
 
-  // Load profile data on component mount
+  // Load profile data on mount
   useEffect(() => {
     loadProfile();
   }, []);
 
-  // Load profile data
   const loadProfile = async () => {
     try {
       const data = await getProfile();
       setProfile(data);
       setFormData({
-        name: data.user.name,
-        email: data.user.email,
+        name: data?.user?.name || '',
+        email: data?.user?.email || '',
       });
     } catch (error) {
       console.error('Error loading profile:', error);
@@ -35,13 +30,11 @@ const Profile = () => {
     }
   };
 
-  // Handle update profile
   const handleUpdate = async (e) => {
     e.preventDefault();
-    
     try {
       await updateProfile(formData.name, formData.email);
-      await loadProfile(); // Reload profile data
+      await loadProfile(); // Reload profile
       setEditing(false);
       alert('Profile updated successfully!');
     } catch (error) {
@@ -50,19 +43,14 @@ const Profile = () => {
     }
   };
 
-  // Format duration
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    
-    if (hours > 0) {
-      return `${hours}h ${minutes}m ${secs}s`;
-    } else if (minutes > 0) {
-      return `${minutes}m ${secs}s`;
-    } else {
-      return `${secs}s`;
-    }
+
+    if (hours > 0) return `${hours}h ${minutes}m ${secs}s`;
+    if (minutes > 0) return `${minutes}m ${secs}s`;
+    return `${secs}s`;
   };
 
   if (loading) {
@@ -87,35 +75,31 @@ const Profile = () => {
     <div className="profile-container">
       <Navbar />
       <div className="profile-content">
+        {/* Header */}
         <div className="profile-header">
           <h1>👤 Profile</h1>
         </div>
 
-
-
-          {/* Statistics Section */}
+        {/* Stats */}
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-icon">📝</div>
-            <div className="stat-value">{profile.notes.length}</div>
+            <div className="stat-value">{profile?.notes?.length || 0}</div>
             <div className="stat-label">Notes</div>
           </div>
           <div className="stat-card">
             <div className="stat-icon">💬</div>
-            <div className="stat-value">{profile.chats.length}</div>
+            <div className="stat-value">{profile?.chats?.length || 0}</div>
             <div className="stat-label">Chat Sessions</div>
           </div>
           <div className="stat-card">
             <div className="stat-icon">⏱️</div>
-            <div className="stat-value">{profile.timers.length}</div>
+            <div className="stat-value">{profile?.timers?.length || 0}</div>
             <div className="stat-label">Timer Sessions</div>
           </div>
         </div>
 
-       
-
-
-        {/* User Information Section */}
+        {/* Personal Info */}
         <div className="profile-section">
           <div className="section-header">
             <h2>Personal Information</h2>
@@ -133,7 +117,9 @@ const Profile = () => {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -142,19 +128,25 @@ const Profile = () => {
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
               </div>
               <div className="form-actions">
                 <button type="submit" className="save-btn">Save Changes</button>
-                <button type="button" onClick={() => {
-                  setEditing(false);
-                  setFormData({
-                    name: profile.user.name,
-                    email: profile.user.email,
-                  });
-                }} className="cancel-btn">
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={() => {
+                    setEditing(false);
+                    setFormData({
+                      name: profile?.user?.name || '',
+                      email: profile?.user?.email || '',
+                    });
+                  }}
+                >
                   Cancel
                 </button>
               </div>
@@ -163,52 +155,40 @@ const Profile = () => {
             <div className="profile-info">
               <div className="info-item">
                 <span className="info-label">Name:</span>
-                <span className="info-value">{profile.user.name}</span>
+                <span className="info-value">{profile?.user?.name || 'N/A'}</span>
               </div>
               <div className="info-item">
                 <span className="info-label">Email:</span>
-                <span className="info-value">{profile.user.email}</span>
+                <span className="info-value">{profile?.user?.email || 'N/A'}</span>
               </div>
               <div className="info-item">
                 <span className="info-label">Member Since:</span>
                 <span className="info-value">
-                  {new Date(profile.user.createdAt).toLocaleDateString()}
+                  {profile?.user?.createdAt
+                    ? new Date(profile.user.createdAt).toLocaleDateString()
+                    : 'N/A'}
                 </span>
               </div>
             </div>
           )}
         </div>
 
-        {/* Statistics Section */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-icon">📝</div>
-            <div className="stat-value">{profile.notes.length}</div>
-            <div className="stat-label">Notes</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">💬</div>
-            <div className="stat-value">{profile.chats.length}</div>
-            <div className="stat-label">Chat Sessions</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">⏱️</div>
-            <div className="stat-value">{profile.timers.length}</div>
-            <div className="stat-label">Timer Sessions</div>
-          </div>
-        </div>
-
-        {/* Notes Summary */}
-        {profile.notes.length > 0 && (
+        {/* Recent Notes */}
+        {profile?.notes?.length > 0 && (
           <div className="profile-section">
             <h2>Recent Notes ({profile.notes.length})</h2>
             <div className="notes-list">
               {profile.notes.slice(0, 5).map((note) => (
-                <div key={note._id} className="note-summary">
-                  <h3>{note.title}</h3>
-                  <p>{note.content.substring(0, 100)}{note.content.length > 100 ? '...' : ''}</p>
+                <div key={note._id || note.title} className="note-summary">
+                  <h3>{note.title || 'Untitled'}</h3>
+                  <p>
+                    {(note.content || '').substring(0, 100)}
+                    {(note.content && note.content.length > 100) ? '...' : ''}
+                  </p>
                   <span className="note-date">
-                    {new Date(note.updatedAt).toLocaleDateString()}
+                    {note.updatedAt
+                      ? new Date(note.updatedAt).toLocaleDateString()
+                      : 'No Date'}
                   </span>
                 </div>
               ))}
@@ -217,16 +197,20 @@ const Profile = () => {
         )}
 
         {/* Timer History */}
-        {profile.timers.length > 0 && (
+        {profile?.timers?.length > 0 && (
           <div className="profile-section">
             <h2>Timer History ({profile.timers.length})</h2>
             <div className="timer-list">
               {profile.timers.map((timer, index) => (
                 <div key={timer._id || index} className="timer-item">
                   <div className="timer-info">
-                    <span className="timer-duration">{formatDuration(timer.duration)}</span>
+                    <span className="timer-duration">
+                      {formatDuration(timer.duration || 0)}
+                    </span>
                     <span className="timer-date">
-                      {new Date(timer.createdAt).toLocaleString()}
+                      {timer.createdAt
+                        ? new Date(timer.createdAt).toLocaleString()
+                        : 'No Date'}
                     </span>
                   </div>
                 </div>
@@ -235,18 +219,21 @@ const Profile = () => {
           </div>
         )}
 
-        {/* Chat History Summary */}
-        {profile.chats.length > 0 && (
+        {/* Chat History */}
+        {profile?.chats?.length > 0 && (
           <div className="profile-section">
             <h2>Chat History ({profile.chats.length} sessions)</h2>
             <div className="chats-list">
               {profile.chats.slice(0, 3).map((chat, index) => (
                 <div key={chat._id || index} className="chat-summary">
                   <p className="chat-message-count">
-                    {chat.messages.length} messages
+                    {chat?.messages?.length || 0} messages
                   </p>
                   <span className="chat-date">
-                    Last updated: {new Date(chat.updatedAt).toLocaleString()}
+                    Last updated:{' '}
+                    {chat?.updatedAt
+                      ? new Date(chat.updatedAt).toLocaleString()
+                      : 'No Date'}
                   </span>
                 </div>
               ))}
@@ -259,4 +246,3 @@ const Profile = () => {
 };
 
 export default Profile;
-

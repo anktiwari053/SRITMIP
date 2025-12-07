@@ -18,7 +18,7 @@ exports.protect = async (req, res, next) => {
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
       req.admin = await Admin.findById(decoded.id).select('-password');
       
       if (!req.admin) {

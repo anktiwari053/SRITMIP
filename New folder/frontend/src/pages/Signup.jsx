@@ -19,9 +19,10 @@ const Signup = () => {
     e.preventDefault()
     setError('')
     setLoading(true)
-
+     console.log('Form submit triggered')
     const result = await signup(formData.name, formData.email, formData.password)
     
+    console.log(result);
     if (result.success) {
       navigate('/dashboard')
     } else {

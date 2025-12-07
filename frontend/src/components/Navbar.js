@@ -5,6 +5,7 @@ import { logout } from '../services/authService';
 import Timer from './Timer';
 
 import './Navbar.css';
+import {allnotsh} from '../pages/Allnotsh';
 
 /**
  * Navbar Component
@@ -76,7 +77,7 @@ const Navbar = () => {
           <Link to="/profile" className="nav-link"> 👤Profile</Link>
            <Link to="/about" className="nav-link"> 👥 TeamMembers</Link>
             <Link to="/setTime" className="nav-link"> 👥 SetTime</Link>
-         
+          <Link to="/allnotsh" className="nav-link"> � All Notes</Link>
           
           <button onClick={handleLogout} className="logout-btn">
            🚪 Logout

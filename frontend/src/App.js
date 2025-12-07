@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Chatbot from './pages/Chatbot';
 import Profile from './pages/Profile';
 import About from './pages/TeamMembers';
+import AllNotsh from './pages/Allnotsh.js';
 import SetTime from './pages/SetTime';
 
 import './App.css';
@@ -35,6 +36,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/allnotsh"
+            element={
+              <ProtectedRoute>
+                <AllNotsh />
               </ProtectedRoute>
             }
           />

@@ -5,6 +5,8 @@ import premImg from "./img/linkdin.jpg";
 import Navbar from '../components/Navbar';
 import premImg1 from "./img/Anshika1.jpg";
 import premImg2 from "./img/Akanksha.jpg";
+import premImg3 from "./img/team1.jpg";
+import premImg4 from "./img/team2.jpg";
 
 const teamMembers = [
   {
@@ -34,7 +36,27 @@ const teamMembers = [
     college: "SRIT College",
     email: "akankshapatel9997@gmail.com",
     img: premImg2,
-    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UI/UX tools.",
+    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UI tools.",
+  },
+   {
+    name: "Avanshika Soni",
+    
+    Role: "UI/UX Designer",
+    roll: "0205CS231034",
+    college: "SRIT College",
+    email: "avanshikasonisoni@gmail.com",
+    img: premImg3,
+    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UX tools.",
+  },
+   {
+    name: "Amisha Vishwakarma",
+    
+    Role: "Frontend Developer",
+    roll: "0205CS231019",
+    college: "SRIT College",
+    email: "30amishasharma@gmail.com",
+    img: premImg4,
+    experience:"Gained practical experience in building responsive web interfaces using React.js and modern UI frameworks.",
   },
  
 ];
