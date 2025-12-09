@@ -6,6 +6,22 @@ import  iwt3 from'./notes/IWT UNIT-3 Notes.pdf'
 import  iwt4 from'./notes/IWT UNIT-4 Notes.pdf'
 import  iwt5 from'./notes/iwt.pdf'
 
+import sem31 from './notes/environmental_engineering.pdf';
+import sem32 from './notes/discrete_structures.pdf';
+import sem33 from './notes/data_structure.pdf';
+import sem34 from './notes/digital_systems.pdf';
+import sem35 from './notes/oop.pdf';
+                   
+import sem41 from './notes/m-III.pdf';
+import sem42 from './notes/ada.pdf';
+import sem43 from './notes/se.pdf';
+import sem44 from './notes/coa.pdf';
+import sem45 from './notes/os.pdf';
+
+
+
+
+
 import  Toc from'./notes/Toc unit 1,2.pdf'
 import  pr from'./notes/PR unit 1&2.pdf'
 export const notesData = [
@@ -47,21 +63,64 @@ export const notesData = [
     },
     { 
         semester: "3", 
-        subject: "Mathematics", 
-        title: "Differential Equations", 
-        pdf: "/Virtual-Room-System (2).pdf" 
+        subject: "ENVIRONMENTAL ENGINEERING", 
+        title: " CS-301 Notse ", 
+        pdf:  sem31
     },
     { 
         semester: "3", 
-        subject: "Mathematics", 
-        title: "Differential Equations", 
-        pdf: "/Virtual-Room-System (2).pdf" 
+        subject: "Discrete Structures", 
+        title: " CS-302 Notse", 
+        pdf: sem32 
     },
     { 
         semester: "3", 
-        subject: "Physics", 
-        title: "Electromagnetism", 
-        pdf: "/Virtual-Room-System.pdf" 
+        subject: "DATA STRUCTURE", 
+        title:  " CS-303 Notse", 
+        pdf: sem33 
+    },
+     { 
+        semester: "3", 
+        subject: "Digital systems", 
+        title:  " CS-304 Notse", 
+        pdf: sem34 
+    },
+      { 
+        semester: "3", 
+        subject: "OBJECT ORIENTED PROGRAMMING", 
+        title:  " CS-305 Notse", 
+        pdf: sem35 
+    },
+
+  { 
+        semester: "4", 
+        subject: "Mathematics-III", 
+        title: " CS-401 Notse", 
+        pdf: sem41
+    },
+    { 
+        semester: "4", 
+        subject: "Analysis & Design of Algorithms", 
+        title: " CS-402 Notse", 
+        pdf: sem42
+    },
+    { 
+        semester: "4", 
+        subject: "Software Engineering", 
+        title: " CS-403 Notse", 
+        pdf: sem43
+    },
+    { 
+        semester: "4", 
+        subject: "Computer Organization & Architecture", 
+        title: " CS-404 Notse", 
+        pdf: sem44
+    },
+    { 
+        semester: "4", 
+        subject: "Operating Systems", 
+        title: " CS-405 Notse", 
+        pdf: sem45
     },
     { 
         semester: "5", 
@@ -82,12 +141,7 @@ export const notesData = [
         pdf: iwt2 
     },
     
-     { 
-        semester: "4", 
-        subject: "Internet and Web Technology", 
-        title: "502- UNIT-3", 
-        pdf: iwt3 
-    },
+   
      { 
         semester: "5", 
         subject: "Internet and Web Technology", 
