@@ -75,7 +75,7 @@ const Navbar = () => {
           <Link to="/" className="nav-link"> 🏠Home</Link>
           <Link to="/chatbot" className="nav-link"> 💬Chatbot</Link>
           <Link to="/profile" className="nav-link"> 👤Profile</Link>
-           <Link to="/about" className="nav-link"> 👥 TeamMembers</Link>
+{/*     <Link to="/about" className="nav-link"> 👥 TeamMembers</Link>   */}
             <Link to="/setTime" className="nav-link"> 👥 SetTime</Link>
           <Link to="/allnotsh" className="nav-link"> � All Notes</Link>
           
