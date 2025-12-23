@@ -85,7 +85,7 @@ const About = () => {
             <img src={member.img} alt={member.name} />
             <div className="member-info">
               <h3>{member.name}</h3>
-              <p>Role: {member.Role}</p>
+              
               <p>Roll No: {member.roll}</p>
               <p>College: {member.college}</p>
               <p>Email: {member.email}</p>
