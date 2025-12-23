@@ -89,7 +89,7 @@ const About = () => {
               <p>Roll No: {member.roll}</p>
               <p>College: {member.college}</p>
               <p>Email: {member.email}</p>
-/*          <p>Experience: {member. experience}</p> */
+
             </div>
             
           </div>
