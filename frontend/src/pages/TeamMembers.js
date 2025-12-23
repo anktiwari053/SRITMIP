@@ -18,6 +18,7 @@ const teamMembers = [
     img: premImg,
     experience:"Backend development including REST API creation, user authentication, data management, and server-side logic using Node.js and Express.",
   },
+  /*
   {
     name: "Anshika Prajapati",
     Role: "Frontend Developer",
@@ -58,7 +59,7 @@ const teamMembers = [
     img: premImg4,
     experience:"Gained practical experience in building responsive web interfaces using React.js and modern UI frameworks.",
   },
- 
+  */
 ];
 
 const About = () => {
