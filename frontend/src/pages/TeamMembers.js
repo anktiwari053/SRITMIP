@@ -11,7 +11,7 @@ import premImg4 from "./img/team2.jpg";
 const teamMembers = [
   {
     name: "Ank Tiwari",
-    Role: "Backend DevelopeR",
+    
     roll: "0205CS231026",
     college: "SRIT College",
     email: "premtiwar704@gmail.com",
