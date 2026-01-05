@@ -1,0 +1,230 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Clock View */
+.clock-view, .timer-view {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.time-display {
+    font-size: 8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.date-display {
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0.9;
+    animation: fadeIn 0.7s ease-in;
+}
+
+/* Timer View */
+.timer-input-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.input-group input {
+    width: 100px;
+    height: 80px;
+    font-size: 3rem;
+    text-align: center;
+    border: 3px solid rgba(255,255,255,0.5);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: white;
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.05);
+}
+
+.input-group input::-webkit-inner-spin-button,
+.input-group input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.separator {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+}
+
+.timer-display {
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.timer-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Button Colors */
+.btn-clock {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    color: white;
+    font-size: 1.1rem;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-pause {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.control-buttons {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-toggle {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+.btn-bg {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.timer-display.warning {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Responsive */
+@media(max-width:768px) {
+    .time-display { font-size: 4rem; }
+    .date-display { font-size: 1.5rem; }
+    .timer-input-section h2 { font-size: 2rem; }
+    .input-group input { width: 80px; height: 60px; font-size: 2rem; }
+    .separator { font-size: 2rem; }
+    .timer-display { font-size: 3rem; min-height: 100px; }
+    .btn { padding: 12px 25px; font-size: 1rem; }
+    .control-buttons { bottom: 20px; }
+}
+
+@media(max-width:480px) {
+    .time-display { font-size: 3rem; }
+    .date-display { font-size: 1.2rem; }
+    .input-group { gap: 5px; }
+    .input-group input { width: 60px; height: 50px; font-size: 1.5rem; }
+    .timer-display { font-size: 2.5rem; }
+    .timer-controls { flex-direction: column; width: 100%; }
+    .timer-controls .btn { width: 100%; }
+    .control-buttons { flex-direction: column; width: 100%; padding: 0 20px; }
+    .control-buttons .btn { width: 100%; }
+}
