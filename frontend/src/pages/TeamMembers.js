@@ -1,101 +1,99 @@
-// About.js
 import React from "react";
-import "./About.css"; // CSS file
+import "./About.css";
 import premImg from "./img/linkdin.jpg";
-import Navbar from '../components/Navbar';
-import premImg1 from "./img/Anshika1.jpg";
-import premImg2 from "./img/Akanksha.jpg";
-import premImg3 from "./img/team1.jpg";
-import premImg4 from "./img/team2.jpg";
-
-const teamMembers = [
-  {
-    name: "Ank Tiwari",
-    
-    roll: "0205CS231026",
-    college: "SRIT College",
-    email: "premtiwar704@gmail.com",
-    img: premImg,
-    experience:"Backend development including REST API creation, user authentication, data management, and server-side logic using Node.js and Express.",
-  },
-  /*
-  {
-    name: "Anshika Prajapati",
-    Role: "Frontend Developer",
-    roll: "0205CS231027",
-    college: "SRIT College",
-    email: "anshikaprajapati110405@gmail.com ",
-    img: premImg1,
-    experience:"Gained practical experience in building responsive web interfaces using HTML, CSS, JavaScript, and modern UI frameworks.",
-
-  },
-  {
-    name: "Akanksha Patel",
-    
-    Role: "UI/UX Designer",
-    roll: "0205CS231015",
-    college: "SRIT College",
-    email: "akankshapatel9997@gmail.com",
-    img: premImg2,
-    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UI tools.",
-  },
-   {
-    name: "Avanshika Soni",
-    
-    Role: "UI/UX Designer",
-    roll: "0205CS231034",
-    college: "SRIT College",
-    email: "avanshikasonisoni@gmail.com",
-    img: premImg3,
-    experience:"Gained hands-on experience in user research, wireframing, and designing intuitive interfaces using modern UX tools.",
-  },
-   {
-    name: "Amisha Vishwakarma",
-    
-    Role: "Frontend Developer",
-    roll: "0205CS231019",
-    college: "SRIT College",
-    email: "30amishasharma@gmail.com",
-    img: premImg4,
-    experience:"Gained practical experience in building responsive web interfaces using React.js and modern UI frameworks.",
-  },
-  */
-];
+import Navbar from "../components/Navbar";
 
 const About = () => {
   return (
-    
-    <div className="about-container">
-       <Navbar />
-      <h1> Team</h1>
-       <p
-        style={{
-          fontSize: "18px",
-          marginBottom: "40px",
-          color: "#333",
-          lineHeight: "1.6",
-           
-        }}
-      >
-        Meet our talented team members and learn about their roles in this project.
-      </p>
-      <div className="team-container">
-        {teamMembers.map((member, index) => (
-          <div className="member-card" key={index}>
-            <img src={member.img} alt={member.name} />
-            <div className="member-info">
-              <h3>{member.name}</h3>
-              
-              <p>Roll No: {member.roll}</p>
-              <p>College: {member.college}</p>
-              <p>Email: {member.email}</p>
+    <>
+      <Navbar />
 
+      <div className="about-page">
+        {/* HERO SECTION */}
+        <section className="about-hero">
+          <h1>About Virtual Room System</h1>
+          <p>
+            A modern full-stack web application built to provide a smart,
+            secure, and interactive digital workspace.
+          </p>
+        </section>
+
+        {/* ABOUT CONTENT */}
+        <section className="about-content">
+          <h2>📌 About This Project</h2>
+          <p>
+            <strong>Virtual Room System</strong> is designed to help users manage
+            notes, track time, interact with an AI chatbot, and maintain secure
+            profiles — all in one place.
+          </p>
+
+          <p>
+            The project is built using <strong>React.js</strong> on the frontend,
+            <strong> Node.js & Express.js</strong> on the backend, and
+            <strong> MongoDB</strong> for data storage. It follows modern
+            development practices and secure authentication using JWT.
+          </p>
+        </section>
+
+        {/* TEAM / DEVELOPER SECTION */}
+        <section className="developer-section">
+          <h2>👨‍💻 Developer</h2>
+
+          <div className="developer-profile">
+            <img src={premImg} alt="Ankit Tiwari" />
+
+            <div className="developer-info">
+              <h3>Ank Tiwari</h3>
+              <p><strong>Contact:</strong> +917447040</p>
+              <p><strong>Roll No:</strong> 0205CS231026</p>
+              <p><strong>College:</strong> SRIT College</p>
+              <p><strong>Email:</strong> premtiwar704@gmail.com</p>
+
+              <div className="developer-links">
+ 
+
+
+              <p className="experience">
+                <strong>Experience:</strong> Backend development including REST
+                API creation, user authentication, database management, and
+                server-side logic using Node.js and Express.
+              </p>
+
+               <a
+    href="https://anktiwari053.github.io/Portfolio/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    🌐 Portfolio
+  </a>
+
+  <a
+    href="https://github.com/anktiwari053"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    💻 GitHub
+  </a>
+
+  <a
+    href="https://www.linkedin.com/in/ank-tiwari/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    🔗 LinkedIn
+  </a>
+</div>
             </div>
-            
           </div>
-        ))}
+        </section>
+
+        {/* FOOTER */}
+        <footer className="about-footer">
+          © {new Date().getFullYear()} Virtual Room System <br />
+          Designed & Developed by <strong>Ank Tiwari</strong>
+        </footer>
       </div>
-    </div>
+    </>
   );
 };
 
