@@ -80,7 +80,7 @@ const Profile = () => {
           <h1>👤   <span className="info-value">{profile?.user?.name || 'N/A'}</span> </h1>
         </div>
 
-        {/* Stats */}
+        {/* Stats 
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-icon">📝</div>
@@ -96,7 +96,7 @@ const Profile = () => {
             <div className="stat-icon">⏱️</div>
             <div className="stat-value">{profile?.timers?.length || 0}</div>
             <div className="stat-label">Timer Sessions</div>
-          </div>
+          </div>  */}
         </div>
 
         {/* Personal Info */}
@@ -171,6 +171,27 @@ const Profile = () => {
               </div>
             </div>
           )}
+
+                  {/* Stats  */}
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-icon">📝</div>
+            <div className="stat-value">{profile?.notes?.length || 0}</div>
+            <div className="stat-label">Notes</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">💬</div>
+            <div className="stat-value">{profile?.chats?.length || 0}</div>
+            <div className="stat-label">Chat Sessions</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">⏱️</div>
+            <div className="stat-value">{profile?.timers?.length || 0}</div>
+            <div className="stat-label">Timer Sessions</div>
+          </div>  
+
+
+            
         </div>
 
         {/* Recent Notes */}
