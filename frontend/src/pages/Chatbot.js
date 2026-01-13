@@ -2,9 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import './Chatbot.css';
 
-/**
- * Hardcoded Knowledge Base
- */
 const KNOWLEDGE_BASE = {
   "hello": "Namaste! Main aapka AI assistant hoon. Main kaise madad kar sakta hoon?",
   "hi": "Hello! Kaise hain aap?",
@@ -20,37 +17,39 @@ const Chatbot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
-  
-  // Timer ke liye ref
   const idleTimerRef = useRef(null);
 
-  // Auto message function
+  // Auto message function jo check karega ki session mein pehle bheja gaya hai ya nahi
   const sendAutoHelpMessage = () => {
-    // Check karein agar last message assistant ka hi "help" wala toh baar baar na bheje
-    const autoMsg = {
-      role: 'assistant',
-      content: "Main aap ki kya help kar sakta hoon? Agar aap ka question meri database mein hai toh main aapke liye kuch madad kar doonga.",
-      timestamp: new Date()
-    };
-    setMessages(prev => [...prev, autoMsg]);
-  };
+    const hasSentInSession = sessionStorage.getItem('autoMsgSent');
 
-  // Timer reset karne ka function
-  const resetIdleTimer = () => {
-    if (idleTimerRef.current) {
-      clearTimeout(idleTimerRef.current);
+    if (!hasSentInSession) {
+      const autoMsg = {
+        role: 'assistant',
+        content: "Main aap ki kya help kar sakta hoon? Agar aap ka question meri database mein hai toh main aapke liye kuch madad kar doonga.",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, autoMsg]);
+      
+      // Session mein mark kar do ki is baar ka message ho gaya
+      sessionStorage.setItem('autoMsgSent', 'true');
     }
-    idleTimerRef.current = setTimeout(() => {
-      // Agar user ne 5 sec se kuch nahi kiya aur chat khali nahi hai
-      sendAutoHelpMessage();
-    }, 5000); 
   };
 
-  // Component mount hone par timer start karein
+  // Timer setup: Sirf tab chalega jab tak message nahi bheja gaya
   useEffect(() => {
-    resetIdleTimer();
-    return () => clearTimeout(idleTimerRef.current);
-  }, [messages]); // Jab bhi messages change honge timer reset hoga
+    const hasSentInSession = sessionStorage.getItem('autoMsgSent');
+    
+    if (!hasSentInSession) {
+      idleTimerRef.current = setTimeout(() => {
+        sendAutoHelpMessage();
+      }, 5000);
+    }
+
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, []); // Empty dependency taaki sirf mount par chale
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -60,32 +59,26 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages, loading]);
 
-  const getBotResponse = (userInput) => {
-    const input = userInput.toLowerCase().trim();
-    let foundKey = Object.keys(KNOWLEDGE_BASE).find(key => input.includes(key));
-    if (foundKey) {
-      return KNOWLEDGE_BASE[foundKey];
-    } else {
-      return "Maaf kijiye, mujhe iska jawab nahi pata. Aap 'help' type karke dekh sakte hain!";
-    }
-  };
-
   const handleSend = async (e) => {
     e.preventDefault();
     if (!inputMessage.trim() || loading) return;
 
+    // Agar user khud message bhej de, toh auto message ko cancel kar do
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    sessionStorage.setItem('autoMsgSent', 'true'); 
+
     const userText = inputMessage.trim();
     setInputMessage('');
-    resetIdleTimer(); // Message bhejne par timer reset
-
-    const userMsgObj = { role: 'user', content: userText, timestamp: new Date() };
-    setMessages(prev => [...prev, userMsgObj]);
+    
+    setMessages(prev => [...prev, { role: 'user', content: userText, timestamp: new Date() }]);
 
     setLoading(true);
     setTimeout(() => {
-      const botText = getBotResponse(userText);
-      const botMsgObj = { role: 'assistant', content: botText, timestamp: new Date() };
-      setMessages(prev => [...prev, botMsgObj]);
+      const input = userText.toLowerCase();
+      let foundKey = Object.keys(KNOWLEDGE_BASE).find(key => input.includes(key));
+      const botText = foundKey ? KNOWLEDGE_BASE[foundKey] : "Maaf kijiye, mujhe iska jawab nahi pata.";
+      
+      setMessages(prev => [...prev, { role: 'assistant', content: botText, timestamp: new Date() }]);
       setLoading(false);
     }, 800);
   };
@@ -96,28 +89,17 @@ const Chatbot = () => {
       <div className="chatbot-content">
         <div className="chatbot-header">
           <h1>💬 Smart Assistant</h1>
-          <p>Auto-Help Bot</p>
         </div>
 
         <div className="chat-messages">
-          {messages.length === 0 ? (
-            <div className="empty-chat">
-              <div className="chat-icon">🤖</div>
-              <p>Mujhse kuch puchiye!</p>
-            </div>
-          ) : (
-            messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.role === 'user' ? 'user-message' : 'bot-message'}`}>
-                <div className="message-content">
-                  <div className="message-role">{msg.role === 'user' ? '👤 You' : '🤖 Bot'}</div>
-                  <div className="message-text">{msg.content}</div>
-                  <div className="message-time">
-                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </div>
-                </div>
+          {messages.map((msg, index) => (
+            <div key={index} className={`message ${msg.role === 'user' ? 'user-message' : 'bot-message'}`}>
+              <div className="message-content">
+                <div className="message-text">{msg.content}</div>
+                <div className="message-time">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
               </div>
-            ))
-          )}
+            </div>
+          ))}
           {loading && <div className="typing-loader">Bot soch raha hai...</div>}
           <div ref={messagesEndRef} />
         </div>
@@ -126,14 +108,11 @@ const Chatbot = () => {
           <input
             type="text"
             value={inputMessage}
-            onChange={(e) => {
-              setInputMessage(e.target.value);
-              resetIdleTimer(); // Type karte waqt bhi timer reset
-            }}
+            onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Type a message..."
             className="chat-input"
           />
-          <button type="submit" className="send-btn" disabled={!inputMessage.trim()}>Send</button>
+          <button type="submit" className="send-btn">Send</button>
         </form>
       </div>
     </div>
