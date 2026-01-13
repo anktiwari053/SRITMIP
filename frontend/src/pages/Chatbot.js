@@ -3,13 +3,19 @@ import Navbar from '../components/Navbar';
 import './Chatbot.css';
 
 const KNOWLEDGE_BASE = {
-  "hello": "Namaste! Main aapka AI assistant hoon. Main kaise madad kar sakta hoon?",
-  "hi": "Hello! Kaise hain aap?",
-  "kaise ho": "Main bilkul badhiya hoon! Aap kaise hain?",
-  "naam": "Mera naam  Eco Chat hai .",
-  "help": "Main aapke basic sawalon ke jawab de sakta hoon. Try karein: 'naam' ya 'kaise ho'",
-  "bye": "Alvida! Apna khayal rakhiyega.",
- "creator": "Is website ko Ank Tiwari ne React ka use karke develop kiya hai.",
+  "hello": "Namaste! Main aapka AI assistant hoon. Main kaise madad kar sakta hoon? / Hello! I am your AI assistant. How can I help you?",
+
+  "hi": "Hello! Kaise hain aap? / Hi! How are you?",
+
+  "kaise ho": "Main bilkul badhiya hoon! Aap kaise hain? / I am doing great! How are you?",
+
+  "naam": "Mera naam Eco Chat hai. / My name is Eco Chat.",
+
+  "help": "Main aapke basic sawalon ke jawab de sakta hoon. Try karein: 'naam' ya 'kaise ho' / I can answer your basic questions. Try: 'name' or 'how are you'",
+
+  "bye": "Alvida! Apna khayal rakhiyega. / Goodbye! Take care of yourself.",
+
+  "creator": "Is website ko Ank Tiwari ne React ka use karke develop kiya hai. / This website was developed by Ank Tiwari using React.",
 };
 
 const Chatbot = () => {
@@ -26,7 +32,7 @@ const Chatbot = () => {
     if (!hasSentInSession) {
       const autoMsg = {
         role: 'assistant',
-        content: "Main aap ki kya help kar sakta hoon? Agar aap ka question meri database mein hai toh main aapke liye kuch madad kar doonga.",
+        content: "Main aap ki kya help kar sakta hoon? Agar aap ka question meri database mein hai toh main aapke liye kuch madad kar doonga. /  How can I help you? If your question is in my database, I will help you.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, autoMsg]);
