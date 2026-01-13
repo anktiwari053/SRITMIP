@@ -77,7 +77,7 @@ const Profile = () => {
       <div className="profile-content">
         {/* Header */}
         <div className="profile-header">
-          <h1>👤 Profile</h1>
+          <h1>👤   <span className="info-value">{profile?.user?.name || 'N/A'}</span> </h1>
         </div>
 
         {/* Stats */}
