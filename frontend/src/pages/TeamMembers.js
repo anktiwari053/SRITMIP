@@ -89,7 +89,7 @@ const About = () => {
 
         {/* FOOTER */}
         <footer className="about-footer">
-          © {new Date().getFullYear()} Virtual Room System <br />
+          © 2025 Virtual Room System <br />
           Designed & Developed by <strong>Ank Tiwari</strong>
         </footer>
       </div>
