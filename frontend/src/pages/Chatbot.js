@@ -88,7 +88,7 @@ const Chatbot = () => {
       <Navbar />
       <div className="chatbot-content">
         <div className="chatbot-header">
-          <h1>💬 Smart Assistant</h1>
+          <h1>💬 Eco Chat</h1>
         </div>
 
         <div className="chat-messages">
