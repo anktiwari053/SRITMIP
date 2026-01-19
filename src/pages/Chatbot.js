@@ -1,96 +1,86 @@
-// Chatbot page component with OpenAI integration
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
-import { getChatHistory, sendMessage, clearChatHistory } from '../services/chatbotService';
 import './Chatbot.css';
 
-/**
- * Chatbot Page Component
- * Interactive chatbot interface with message history
- */
+const KNOWLEDGE_BASE = {
+  "hello": "Namaste! Main aapka AI assistant hoon. Main kaise madad kar sakta hoon?",
+  "hi": "Hello! Kaise hain aap?",
+  "kaise ho": "Main bilkul badhiya hoon! Aap kaise hain?",
+  "naam": "Mera naam  Eco Chat hai .",
+  "help": "Main aapke basic sawalon ke jawab de sakta hoon. Try karein: 'naam' ya 'kaise ho'",
+  "bye": "Alvida! Apna khayal rakhiyega.",
+ "creator": "Is website ko Ank Tiwari ne React ka use karke develop kiya hai.",
+};
+
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const idleTimerRef = useRef(null);
 
-  // Load chat history on component mount
-  useEffect(() => {
-    loadChatHistory();
-  }, []);
+  // Auto message function jo check karega ki session mein pehle bheja gaya hai ya nahi
+  const sendAutoHelpMessage = () => {
+    const hasSentInSession = sessionStorage.getItem('autoMsgSent');
 
-  // Scroll to bottom when messages update
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  // Load chat history
-  const loadChatHistory = async () => {
-    try {
-      const data = await getChatHistory();
-      setMessages(data.messages || []);
-    } catch (error) {
-      console.error('Error loading chat history:', error);
+    if (!hasSentInSession) {
+      const autoMsg = {
+        role: 'assistant',
+        content: "Main aap ki kya help kar sakta hoon? Agar aap ka question meri database mein hai toh main aapke liye kuch madad kar doonga.",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, autoMsg]);
+      
+      // Session mein mark kar do ki is baar ka message ho gaya
+      sessionStorage.setItem('autoMsgSent', 'true');
     }
   };
 
-  // Scroll to bottom of chat
+  // Timer setup: Sirf tab chalega jab tak message nahi bheja gaya
+  useEffect(() => {
+    const hasSentInSession = sessionStorage.getItem('autoMsgSent');
+    
+    if (!hasSentInSession) {
+      idleTimerRef.current = setTimeout(() => {
+        sendAutoHelpMessage();
+      }, 5000);
+    }
+
+    return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, []); // Empty dependency taaki sirf mount par chale
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Handle send message
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, loading]);
+
   const handleSend = async (e) => {
     e.preventDefault();
+    if (!inputMessage.trim() || loading) return;
 
-    if (!inputMessage.trim() || loading) {
-      return;
-    }
+    // Agar user khud message bhej de, toh auto message ko cancel kar do
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    sessionStorage.setItem('autoMsgSent', 'true'); 
 
-    const userMessage = inputMessage.trim();
+    const userText = inputMessage.trim();
     setInputMessage('');
+    
+    setMessages(prev => [...prev, { role: 'user', content: userText, timestamp: new Date() }]);
+
     setLoading(true);
-
-    // Add user message to UI immediately
-    const newUserMessage = {
-      role: 'user',
-      content: userMessage,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, newUserMessage]);
-
-    try {
-      // Send message to backend
-      const response = await sendMessage(userMessage);
+    setTimeout(() => {
+      const input = userText.toLowerCase();
+      let foundKey = Object.keys(KNOWLEDGE_BASE).find(key => input.includes(key));
+      const botText = foundKey ? KNOWLEDGE_BASE[foundKey] : "Maaf kijiye, mujhe iska jawab nahi pata.";
       
-      // Update messages with assistant response
-      setMessages(response.chatHistory || []);
-    } catch (error) {
-      console.error('Error sending message:', error);
-      
-      // Add error message
-      const errorMessage = {
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again later.',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
+      setMessages(prev => [...prev, { role: 'assistant', content: botText, timestamp: new Date() }]);
       setLoading(false);
-    }
-  };
-
-  // Handle clear chat
-  const handleClear = async () => {
-    if (window.confirm('Are you sure you want to clear all chat history?')) {
-      try {
-        await clearChatHistory();
-        setMessages([]);
-      } catch (error) {
-        console.error('Error clearing chat:', error);
-        alert('Error clearing chat. Please try again.');
-      }
-    }
+    }, 800);
   };
 
   return (
@@ -98,55 +88,19 @@ const Chatbot = () => {
       <Navbar />
       <div className="chatbot-content">
         <div className="chatbot-header">
-          <h1>💬 Chatbot Assistant</h1>
-          <p>Ask me anything! I'm here to help.</p>
-          {messages.length > 0 && (
-            <button onClick={handleClear} className="clear-btn">
-              Clear Chat
-            </button>
-          )}
+          <h1>💬 Smart Assistant</h1>
         </div>
 
         <div className="chat-messages">
-          {messages.length === 0 ? (
-            <div className="empty-chat">
-              <div className="chat-icon">🤖</div>
-              <p>Start a conversation by typing a message below!</p>
-            </div>
-          ) : (
-            messages.map((message, index) => (
-              <div
-                key={index}
-                className={`message ${message.role === 'user' ? 'user-message' : 'bot-message'}`}
-              >
-                <div className="message-content">
-                  <div className="message-role">
-                    {message.role === 'user' ? '👤 You' : '🤖 Assistant'}
-                  </div>
-                  <div className="message-text">{message.content}</div>
-                  {message.timestamp && (
-                    <div className="message-time">
-                      {new Date(message.timestamp).toLocaleTimeString()}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))
-          )}
-          
-          {loading && (
-            <div className="message bot-message">
+          {messages.map((msg, index) => (
+            <div key={index} className={`message ${msg.role === 'user' ? 'user-message' : 'bot-message'}`}>
               <div className="message-content">
-                <div className="message-role">🤖 Assistant</div>
-                <div className="message-text loading-dots">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+                <div className="message-text">{msg.content}</div>
+                <div className="message-time">{msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
               </div>
             </div>
-          )}
-          
+          ))}
+          {loading && <div className="typing-loader">Bot soch raha hai...</div>}
           <div ref={messagesEndRef} />
         </div>
 
@@ -155,17 +109,10 @@ const Chatbot = () => {
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Type your message here..."
+            placeholder="Type a message..."
             className="chat-input"
-            disabled={loading}
           />
-          <button
-            type="submit"
-            className="send-btn"
-            disabled={loading || !inputMessage.trim()}
-          >
-            Send
-          </button>
+          <button type="submit" className="send-btn">Send</button>
         </form>
       </div>
     </div>
@@ -173,4 +120,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
