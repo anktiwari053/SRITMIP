@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css";
-import premImg from "./img/linkdin.jpg";
+import premImg from "./img/ak1.jpeg";
 import Navbar from "../components/Navbar";
 
 const About = () => {
