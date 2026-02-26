@@ -4,10 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signup } from '../services/authService';
 import './Auth.css';
 
-/**
- * Signup Page Component
- * User registration page with name, email, and password
- */
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +11,7 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -28,17 +25,34 @@ const Signup = () => {
     setError('');
   };
 
-  // Handle form submission
+  // Form validation function
+  const isFormValid = () => {
+    return (
+      formData.name.trim().length >= 3 &&
+      formData.email &&
+      formData.password.length >= 6 &&
+      formData.password === formData.confirmPassword
+    );
+  };
+
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Validation
+    // Name validation
+    if (formData.name.trim().length < 3) {
+      setError('Name must be at least 3 characters');
+      return;
+    }
+
+    // Password match check
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
     }
 
+    // Password length check
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters');
       return;
@@ -50,7 +64,10 @@ const Signup = () => {
       await signup(formData.name, formData.email, formData.password);
       navigate('/');
     } catch (error) {
-      setError(error.response?.data?.message || 'Error creating account. Please try again.');
+      setError(
+        error.response?.data?.message ||
+        'Error creating account. Please try again.'
+      );
     } finally {
       setLoading(false);
     }
@@ -67,6 +84,8 @@ const Signup = () => {
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit} className="auth-form">
+          
+          {/* Name Field */}
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -76,10 +95,12 @@ const Signup = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
+              minLength={3}
               required
             />
           </div>
 
+          {/* Email Field */}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -93,6 +114,7 @@ const Signup = () => {
             />
           </div>
 
+          {/* Password Field */}
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -102,10 +124,12 @@ const Signup = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password (min 6 characters)"
+              minLength={6}
               required
             />
           </div>
 
+          {/* Confirm Password */}
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
@@ -119,9 +143,15 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit" className="auth-btn" disabled={loading}>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="auth-btn"
+            disabled={loading || !isFormValid()}
+          >
             {loading ? 'Creating account...' : 'Sign Up'}
           </button>
+
         </form>
 
         <div className="auth-footer">
@@ -138,4 +168,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
