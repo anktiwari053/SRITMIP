@@ -77,7 +77,8 @@ const Navbar = () => {
           <Link to="/profile" className="nav-link"> 👤Profile</Link>
          
             <Link to="/setTime" className="nav-link"> 👥 SetTime</Link>
-          <Link to="/allnotsh" className="nav-link"> � All Notes</Link>
+         {/*  <Link to="/allnotsh" className="nav-link"> � All Notes</Link> */}
+             <Link  className="nav-link"> � All Notes</Link>
             <Link to="/about" className="nav-link">  About</Link> 
           
           <button onClick={handleLogout} className="logout-btn">
