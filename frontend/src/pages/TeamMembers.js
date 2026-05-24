@@ -1,6 +1,5 @@
 import React from "react";
 import "./About.css";
-import premImg from "./img/ak1.jpeg";
 import Navbar from "../components/Navbar";
 
 const About = () => {
@@ -9,89 +8,145 @@ const About = () => {
       <Navbar />
 
       <div className="about-page">
+
         {/* HERO SECTION */}
         <section className="about-hero">
           <h1>About Virtual Room System</h1>
+
           <p>
             A modern full-stack web application built to provide a smart,
             secure, and interactive digital workspace.
           </p>
         </section>
 
-        {/* ABOUT CONTENT */}
+        {/* ABOUT PROJECT */}
         <section className="about-content">
           <h2>📌 About This Project</h2>
+
           <p>
-            <strong>Virtual Room System</strong> is designed to help users manage
-            notes, track time, interact with an AI chatbot, and maintain secure
-            profiles — all in one place.
+            <strong>Virtual Room System</strong> is designed to help users
+            manage notes, track time, interact with an AI chatbot, and maintain
+            secure profiles — all in one place.
           </p>
 
           <p>
-            The project is built using <strong>React.js</strong> on the frontend,
-            <strong> Node.js & Express.js</strong> on the backend, and
-            <strong> MongoDB</strong> for data storage. It follows modern
-            development practices and secure authentication using JWT.
+            The project is built using <strong>React.js</strong> on the
+            frontend, <strong>Node.js & Express.js</strong> on the backend,
+            and <strong>MongoDB</strong> for database management.
+          </p>
+
+          <p>
+            This system provides a clean user interface, secure authentication,
+            real-time interaction, and efficient data management.
           </p>
         </section>
 
-        {/* TEAM / DEVELOPER SECTION */}
+        {/* TEAM SECTION */}
         <section className="developer-section">
-          <h2>👨‍💻 Developer</h2>
+          <h2>👨‍💻 Our Team</h2>
 
-          <div className="developer-profile">
-            <img src={premImg} alt="Ankit Tiwari" />
+          <p className="team-text">
+            This project was successfully developed by our team members who
+            worked together on frontend development, backend APIs,
+            database management, authentication, UI design, and testing
+            of the Virtual Room System.
+          </p>
 
-            <div className="developer-info">
-              <h3>Ank Tiwari</h3>
-              <p><strong>Contact:</strong> +917447040</p>
-              <p><strong>Roll No:</strong> 0205CS231026</p>
-              <p><strong>College:</strong> SRIT College</p>
-              <p><strong>Email:</strong> premtiwar704@gmail.com</p>
+          <div className="team-container">
 
-              <div className="developer-links">
- 
+            {/* MEMBER 1 */}
+            <div className="developer-profile">
+              <div className="developer-info">
+                <h3>Ank Tiwari</h3>
 
+                <p>
+                  <strong>Role:</strong> Backend Developer
+                </p>
 
-              <p className="experience">
-                <strong>Experience:</strong> Backend development including REST
-                API creation, user authentication, database management, and
-                server-side logic using Node.js and Express.
-              </p>
-
-               <a
-    href="https://anktiwari053.github.io/Portfolio/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    🌐 Portfolio
-  </a>
-
-  <a
-    href="https://github.com/anktiwari053"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    💻 GitHub
-  </a>
-
-  <a
-    href="https://www.linkedin.com/in/ank-tiwari/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    🔗 LinkedIn
-  </a>
-</div>
+                <p>
+                  Worked on REST APIs, JWT authentication,
+                  MongoDB integration, and server-side logic
+                  using Node.js & Express.js.
+                </p>
+              </div>
             </div>
+
+            {/* MEMBER 2 */}
+            <div className="developer-profile">
+              <div className="developer-info">
+                <h3>Anshika Prajapati</h3>
+
+                <p>
+                  <strong>Role:</strong> Frontend Developer
+                </p>
+
+                <p>
+                  Developed responsive pages, React components,
+                  routing system, and improved user interface
+                  experience.
+                </p>
+              </div>
+            </div>
+
+            {/* MEMBER 3 */}
+            <div className="developer-profile">
+              <div className="developer-info">
+                <h3>Amisha Vishwakarma</h3>
+
+                <p>
+                  <strong>Role:</strong> UI/UX Designer
+                </p>
+
+                <p>
+                  Designed layouts, styling structure,
+                  animations, and improved overall visual
+                  appearance of the project.
+                </p>
+              </div>
+            </div>
+
+            {/* MEMBER 4 */}
+            <div className="developer-profile">
+              <div className="developer-info">
+                <h3>Akanksha Patel</h3>
+
+                <p>
+                  <strong>Role:</strong> Database Manager
+                </p>
+
+                <p>
+                  Managed MongoDB collections, database
+                  connectivity, schema structure, and data
+                  storage optimization.
+                </p>
+              </div>
+            </div>
+
+            {/* MEMBER 5 */}
+            <div className="developer-profile">
+              <div className="developer-info">
+                <h3>Avanshika Soni</h3>
+
+                <p>
+                  <strong>Role:</strong> Testing & Documentation
+                </p>
+
+                <p>
+                  Worked on project testing, documentation,
+                  debugging, and improving overall project quality.
+                </p>
+              </div>
+            </div>
+
           </div>
         </section>
 
         {/* FOOTER */}
         <footer className="about-footer">
           © 2025 Virtual Room System <br />
-          Designed & Developed by <strong>Ank Tiwari</strong>
+          Designed & Developed by <strong>Team Members</strong>
         </footer>
+
       </div>
     </>
   );
