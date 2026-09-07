@@ -44,7 +44,7 @@ const About = () => {
 
             <div className="developer-info">
               <h3>Ank Tiwari</h3>
-              <p><strong>Contact:</strong> +917447040</p>
+              <p><strong>Contact:</strong> +917447040713</p>
               <p><strong>Roll No:</strong> 0205CS231026</p>
               <p><strong>College:</strong> SRIT College</p>
               <p><strong>Email:</strong> premtiwar704@gmail.com</p>
