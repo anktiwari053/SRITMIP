@@ -72,14 +72,14 @@ const Navbar = () => {
 
         {/* Right section - Navigation and User */}
         <div className="navbar-right">
-          <Link to="/" className="nav-link"> 🏠Home</Link>
-          <Link to="/chatbot" className="nav-link"> AI Study Assistant</Link>
-          <Link to="/profile" className="nav-link"> 👤Profile</Link>
+          <Link to="/" className="nav-link"> Your Notes</Link>
+          <Link to="/chatbot" className="nav-link">  Ask Your Doubts</Link>
+          <Link to="/profile" className="nav-link"> Your Account</Link>
          
-            <Link to="/setTime" className="nav-link"> 👥 SetTime</Link>
-          <Link to="/allnotsh" className="nav-link"> � All Notes</Link> 
-          {/*    <Link  className="nav-link"> � All Notes</Link> */}
-            <Link to="/about" className="nav-link">  About</Link> 
+            <Link to="/setTime" className="nav-link"> Study Timer</Link>
+          <Link to="/allnotsh" className="nav-link"> Browse Notes</Link> 
+          {/*    <Link  className="nav-link"> Project Information</Link> */}
+            <Link to="/about" className="nav-link"> Sign Out</Link> 
           
           <button onClick={handleLogout} className="logout-btn">
            🚪 Logout
