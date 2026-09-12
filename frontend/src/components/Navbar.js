@@ -59,7 +59,7 @@ const Navbar = () => {
         {/* Left section - Logo and Clock */}
         <div className="navbar-left">
           <Link to="/" className="navbar-logo">
-            <span className="logo-icon">🏠</span>
+            <span className="logo-icon"></span>
             <span className="logo-text">Virtual Room</span>
           </Link>
           <div className="clock-section">
