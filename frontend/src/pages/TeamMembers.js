@@ -194,12 +194,12 @@ const About = () => {
             <table className="feedback-table">
     <thead>
       <tr>
-        <th>User Name</th>
-        <th>Problem / Feedback</th>
+        <th>User Name :</th> <br>
+        <th>Problem / Feedback :</th> <br>
         <th>Completed</th>
       </tr>
     </thead>
-              </table> </div>
+     </table> </div>
         
 
 
@@ -212,15 +212,15 @@ const About = () => {
             </p>
 
             <p>
-              <strong>Completed:</strong> 2 ✅
+              <strong>Completed:</strong> 3 ✅
             </p>
 
             <p>
-              <strong>In Progress:</strong> 8 🔄
+              <strong>In Progress:</strong> 7 🔄
             </p>
 
             <p>
-              <strong>Current Progress:</strong> 20%
+              <strong>Current Progress:</strong> 30%
             </p>
 
             <p>
