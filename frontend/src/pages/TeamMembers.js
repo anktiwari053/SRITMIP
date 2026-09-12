@@ -186,9 +186,7 @@ const About = () => {
             <div className="developer-info">
               <h3>Ank Tiwari</h3>
 
-              <p>
-                <strong>Role:</strong> Full-Stack Developer
-              </p>
+             
 
               <p>
                 <strong>Education:</strong> Computer Science Engineering
@@ -199,11 +197,7 @@ const About = () => {
                 Jabalpur
               </p>
 
-              <p className="experience">
-                <strong>Development Focus:</strong> Full-stack web development,
-                REST APIs, authentication, database management, React.js,
-                Node.js and Express.js.
-              </p>
+          
 
               <div className="developer-links">
 
