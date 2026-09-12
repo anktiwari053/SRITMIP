@@ -79,9 +79,9 @@ const Navbar = () => {
             <Link to="/setTime" className="nav-link"> Study Timer</Link>
           <Link to="/allnotsh" className="nav-link"> Browse Notes</Link> 
           {/*    <Link  className="nav-link"> Project Information</Link> */}
-            <Link to="/about" className="nav-link"> Sign Out</Link> 
+            <Link to="/about" className="nav-link"> Project Information</Link> 
           
-          <button onClick={handleLogout} className="logout-btn">
+          <button onClick={handleLogout} className="Sign Out">
            🚪 Logout
           </button>
 
