@@ -46,9 +46,15 @@ const Navbar = () => {
 
   // Handle logout
   const handleLogout = () => {
+  const confirmLogout = window.confirm(
+    "Are you sure you want to logout?"
+  );
+
+  if (confirmLogout) {
     logout();
-    navigate('/login');
-  };
+    navigate("/login");
+  }
+};
 
   // Get user from localStorage
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -81,7 +87,7 @@ const Navbar = () => {
           {/*    <Link  className="nav-link"> Project Information</Link> */}
             <Link to="/about" className="nav-link"> Project Information</Link> 
           
-          <button onClick={handleLogout} className="nav-link">
+          <button onClick={handleLogout} className="logout-btn">
            Sign Out 
           </button>
 
