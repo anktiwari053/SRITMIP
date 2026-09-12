@@ -73,7 +73,7 @@ const Navbar = () => {
         {/* Right section - Navigation and User */}
         <div className="navbar-right">
           <Link to="/" className="nav-link"> 🏠Home</Link>
-          <Link to="/chatbot" className="nav-link"> 💬Chatbot</Link>
+          <Link to="/chatbot" className="nav-link"> AI Study Assistant</Link>
           <Link to="/profile" className="nav-link"> 👤Profile</Link>
          
             <Link to="/setTime" className="nav-link"> 👥 SetTime</Link>
