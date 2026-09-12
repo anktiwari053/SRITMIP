@@ -156,18 +156,7 @@ const About = () => {
             Virtual Room has been developed using modern web technologies:
           </p>
 
-          <div className="tech-grid">
-            <span>⚛️ React.js</span>
-            <span>🟨 JavaScript</span>
-            <span>🟢 Node.js</span>
-            <span>🚀 Express.js</span>
-            <span>🍃 MongoDB</span>
-            <span>🔐 JWT Authentication</span>
-            <span>🔗 REST APIs</span>
-            <span>🤖 AI API Integration</span>
-            <span>🎨 HTML & CSS</span>
-            <span>💻 Git & GitHub</span>
-          </div>
+         
         </section>
 
 
@@ -201,82 +190,17 @@ const About = () => {
             We are continuously improving Virtual Room based on real user
             feedback and suggestions.
           </p>
-
-          <div className="feedback-table-wrapper">
+             <div className="feedback-table-wrapper">
             <table className="feedback-table">
-              <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Problem / Feedback</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>User 1</td>
-                  <td>Website response was sometimes slow</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>Academic Notes line needed a darker color</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>Proper spacing was required</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>View PDF was not working</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>About section needed more details</td>
-                  <td>✅ Improved</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>Footer information could be improved</td>
-                  <td>✅ Improved</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>UI creativity could be improved</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>Logout confirmation was required</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>Eco Chatbot response was slow</td>
-                  <td>🔄 In Progress</td>
-                </tr>
-
-                <tr>
-                  <td>User 1</td>
-                  <td>
-                    Eco Chatbot was not answering questions properly
-                  </td>
-                  <td>🔄 In Progress</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Problem / Feedback</th>
+        <th>Completed</th>
+      </tr>
+    </thead>
+              </table> </div>
+        
 
 
           {/* IMPROVEMENT PROGRESS */}
@@ -322,13 +246,13 @@ const About = () => {
 
             <p>
               📧 <strong>Email:</strong>{" "}
-              <a href="mailto:your-email@example.com">
-                your-email@example.com
+              <a href="mailto:anktiwari@sritgroup.net">
+                your-anktiwari@sritgroup.net
               </a>
             </p>
 
             <a
-              href="mailto:your-email@example.com?subject=Virtual Room Feedback&body=Hello, I would like to report a problem or suggest an improvement.%0A%0AProblem / Suggestion:%0A"
+              href="mailto:anktiwari@sritgroup.net?subject=Virtual Room Feedback&body=Hello, I would like to report a problem or suggest an improvement.%0A%0AProblem / Suggestion:%0A"
               className="feedback-email-btn"
             >
               📩 Send Feedback
@@ -369,17 +293,7 @@ const About = () => {
                 digital learning environment for students.
               </p>
 
-              <h4>Development Focus</h4>
-
-              <ul>
-                <li>Full-Stack Web Development</li>
-                <li>React.js</li>
-                <li>Node.js & Express.js</li>
-                <li>REST API Development</li>
-                <li>MongoDB</li>
-                <li>Authentication</li>
-                <li>AI Integration</li>
-              </ul>
+             
 
               <h4>🔗 Connect</h4>
 
