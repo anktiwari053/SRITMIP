@@ -81,8 +81,8 @@ const Navbar = () => {
           {/*    <Link  className="nav-link"> Project Information</Link> */}
             <Link to="/about" className="nav-link"> Project Information</Link> 
           
-          <button onClick={handleLogout} className="Sign Out">
-           🚪 Logout
+          <button onClick={handleLogout} className="nav-link">
+           Sign Out 
           </button>
 
           {user.name && (
