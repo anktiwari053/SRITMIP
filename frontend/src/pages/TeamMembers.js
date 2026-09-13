@@ -194,8 +194,8 @@ const About = () => {
             <table className="feedback-table">
     <thead>
       <tr>
-        <th>User Name :</th> <br>
-        <th>Problem / Feedback :</th> <br>
+        <th>User Name :</th> <br/>
+        <th>Problem / Feedback :</th> <br/>
         <th>Completed</th>
       </tr>
     </thead>
